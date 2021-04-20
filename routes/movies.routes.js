@@ -40,6 +40,7 @@ router.get('/movies', (req, res, next) => {
         });
 })
 
+// details 
 router.get('/movies/:id', (req, res, next) => {
     const { id } = req.params
     MovieModel.findById(id)
@@ -55,17 +56,44 @@ router.get('/movies/:id', (req, res, next) => {
         });
 })
 
-router.post("/movies/:id/delete", (req, rs, next) => {
+// delete
+router.post("/movies/:id/delete", (req, res, next) => {
     const { id } = req.params
     MovieModel.findByIdAndDelete(id)
+
         .then((movie) => {
-            res.redirect('/movies', { movie })
+            res.redirect('/movies')
         }).catch((err) => {
 
         });
 })
 
+// edit
+router.get('/movies/:id/edit', (req, res, next) => {
 
+    const { id } = req.params
+
+    MovieModel.findById(id)
+        .populate("cast")
+        .then((data) => {
+            res.render('movies/edit-movie.hbs', { data })
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+})
+
+router.post("/movies/:id/edit", (req, res, next) => {
+    const { id } = req.params
+    const { title, genre, plot, cast } = req.body
+    MovieModel.findByIdAndUpdate(id, { title, genre, plot, cast })
+        .populate("cast")
+        .then((data) => {
+            res.redirect('/movies')
+        }).catch((err) => {
+
+        });
+})
 
 
 module.exports = router;

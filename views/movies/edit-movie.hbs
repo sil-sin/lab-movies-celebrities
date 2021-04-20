@@ -1,0 +1,27 @@
+<form action="/movies/{{data.id}}/edit" method="POST">
+  <div class="mb-3">
+    <label class="form-label" >Title</label>
+    <input type="text" class="form-control" name="title" value="{{data.title}}">
+  </div>
+    <div class="mb-3">
+    <label  class="form-label">Genre</label>
+    <input type="text" class="form-control" name="genre" value="{{data.genre}}">
+  </div>
+    <div class="mb-3">
+    <label  class="form-label">plot</label>
+    <input type="text" class="form-control" name="plot" value="{{data.plot}}">
+  </div>
+   <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Cast</label>
+  </div>
+  <select class="custom-select" id="inputGroupSelect01" name="cast" value="{{data.cast}}" multiple>
+    <option selected>Choose...</option>
+  {{#each data.cast}}
+    <option value="{{this.id}}">{{this.name}}</option>
+  {{/each}}
+  </select>
+</div>
+<form action="/movies/{{data.id}}/edit" method="POST">
+<button type="submit" class="btn btn-outline-primary">Update</button>
+</form>

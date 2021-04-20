@@ -6,3 +6,19 @@ body {
 a {
   color: #00b7ff;
 }
+
+footer {
+  margin-top: 80px;
+}
+
+.navbar {
+  flex-wrap: nowrap;
+}
+.btn {
+  size: 80%;
+}
+.myBtn {
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+}
